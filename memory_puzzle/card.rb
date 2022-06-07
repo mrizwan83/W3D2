@@ -1,10 +1,9 @@
 class Card 
     attr_reader :face_down, :value
-    ALPHA = ('a'..'z').to_a
 
-    def initialize
+    def initialize(value)
         @face_down = true
-        @value = ALPHA.pop
+        @value = value
     end 
 
     def hide
@@ -22,10 +21,5 @@ class Card
     def to_s
         self.to_s
     end 
-
-    def !=(other_card)
-        other_card.value != self.value 
-    end 
-
 
 end

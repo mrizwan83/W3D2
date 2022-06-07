@@ -1,6 +1,7 @@
 require "byebug"
 require_relative 'card.rb'
 class Board
+    ALPHA = ("a".."z").to_a
     attr_reader :size, :total_cards, :grid
     def initialize(size=4)
         @grid = Array.new(size) {Array.new(size, '_')}
@@ -30,15 +31,20 @@ class Board
 
     def populate
         (@total_cards/2).times do 
-            card = Card.new
-            2.times do 
-                pos = random_position
-                while self[pos] != '_'
-                    pos = random_position
-                end
-                self[pos] = card  
-            end
+            val = ALPHA.pop
+            card1 = Card.new(val)
+            card2 = Card.new(val)
+            place_card(card1)
+            place_card(card2)
         end 
+    end
+
+    def place_card(card)
+        pos = random_position
+        while self[pos] != '_'
+            pos = random_position
+        end
+        self[pos] = card
     end
 
     def cheat
@@ -70,4 +76,3 @@ class Board
     end 
                
 end 
-
